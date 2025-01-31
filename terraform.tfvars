@@ -1,7 +1,7 @@
 cluster_name = "ocp4"
 base_domain = "sandbox410.opentlc.com"
 openshift_pull_secret = "./openshift_pull_secret.json"
-openshift_version = "4.6.28"
+openshift_version = "4.9.59"
 
 aws_extra_tags = {
   "owner" = "admin"

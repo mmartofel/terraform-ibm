@@ -7,7 +7,7 @@
 
 # .tfvars files
 # *.tfvars
-openshift_pull_secret.json
+# openshift_pull_secret.json
 .terraform.lock.hcl
 *.pem
 installer-files/**
