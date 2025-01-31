@@ -73,7 +73,7 @@ variable "infra_count" {
 variable "aws_infra_instance_type" {
   type = string
   description = "Instance type for the infra node(s). Example: `m4.large`."
-  default = "m5.xlarge"
+  default = "m5.2xlarge"
 }
 
 variable "aws_infra_root_volume_type" {
