@@ -6,8 +6,8 @@ terraform {
   required_providers {
     ignition = {
       source = "community-terraform-providers/ignition"
-      # version = "2.1.2"
-      version = "2.3.5"
+      version = "2.1.2"
+      # version = "2.3.5"
     }
   }
 }
@@ -18,7 +18,6 @@ data "aws_ebs_default_kms_key" "current" {}
 
 resource "aws_s3_bucket" "ignition" {
   # bucket = var.ignition_bucket
-  acl = "private"
 
   tags = merge(
     {
@@ -32,11 +31,18 @@ resource "aws_s3_bucket" "ignition" {
   }
 }
 
-resource "aws_s3_bucket_object" "ignition" {
+resource "aws_s3_bucket_ownership_controls" "ignition" {
+  bucket = aws_s3_bucket.ignition.id
+
+  rule {
+    object_ownership = "BucketOwnerEnforced"
+  }
+}
+
+resource "aws_s3_object" "ignition" {
   bucket  = aws_s3_bucket.ignition.id
   key     = "bootstrap.ign"
   content = var.ignition
-  acl     = "private"
 
   server_side_encryption = "AES256"
 
@@ -210,4 +216,3 @@ resource "aws_security_group_rule" "bootstrap_journald_gateway" {
   from_port   = 19531
   to_port     = 19531
 }
-
