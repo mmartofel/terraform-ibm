@@ -15,14 +15,14 @@ variable "aws_bootstrap_instance_type" {
 
 variable "aws_master_instance_type" {
   type        = string
-  description = "Instance type for the master node(s). Default: `m5.2xlarge`."
-  default     = "m5.2xlarge"
+  description = "Instance type for the master node(s). Default: `m6i.xlarge`."
+  default     = "m6i.xlarge"
 }
 
 variable "aws_worker_instance_type" {
   type        = string
-  description = "Instance type for the worker node(s). Default: `m5.2xlarge`."
-  default     = "m5.2xlarge"
+  description = "Instance type for the worker node(s). Default: `m6i.xlarge`."
+  default     = "m6i.xlarge"
 }
 
 variable "aws_infra_instance_type" {
