@@ -31,7 +31,8 @@ data "template_file" "install_config_yaml" {
 apiVersion: v1
 baseDomain: ${var.domain}
 compute:
-- hyperthreading: Enabled
+- architecture: amd64
+  hyperthreading: Enabled
   name: worker
   replicas: 3
   platform:
@@ -45,6 +46,7 @@ compute:
       %{ for zone in var.aws_worker_availability_zones}
       - ${zone}%{ endfor }
 controlPlane:
+  architecture: amd64
   hyperthreading: Enabled
   name: master
   replicas: ${var.master_count}
