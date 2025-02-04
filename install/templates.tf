@@ -100,7 +100,7 @@ resource "null_resource" "manifest_cleanup_worker_machineset" {
 
 resource "local_file" "create_worker_machineset" {
   depends_on = [
-    null_resource.manifest_cleanup_worker_machineset
+    null_resource.manifest_cleanup_worker_
   ]
   count  = var.aws_private_subnets != null ? length(var.aws_private_subnets) : 0
   file_permission = "0644"

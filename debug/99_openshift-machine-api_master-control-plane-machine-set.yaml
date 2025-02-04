@@ -1,0 +1,121 @@
+apiVersion: machine.openshift.io/v1
+kind: ControlPlaneMachineSet
+metadata:
+  creationTimestamp: null
+  labels:
+    machine.openshift.io/cluster-api-cluster: ocp4-bbkn7
+  name: cluster
+  namespace: openshift-machine-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      machine.openshift.io/cluster-api-cluster: ocp4-bbkn7
+      machine.openshift.io/cluster-api-machine-role: master
+      machine.openshift.io/cluster-api-machine-type: master
+  state: Active
+  strategy: {}
+  template:
+    machineType: machines_v1beta1_machine_openshift_io
+    machines_v1beta1_machine_openshift_io:
+      failureDomains:
+        aws:
+        - placement:
+            availabilityZone: us-east-1a
+          subnet:
+            filters:
+            - name: tag:Name
+              values:
+              - ocp4-bbkn7-subnet-private-us-east-1a
+            type: Filters
+        - placement:
+            availabilityZone: us-east-1b
+          subnet:
+            filters:
+            - name: tag:Name
+              values:
+              - ocp4-bbkn7-subnet-private-us-east-1b
+            type: Filters
+        - placement:
+            availabilityZone: us-east-1c
+          subnet:
+            filters:
+            - name: tag:Name
+              values:
+              - ocp4-bbkn7-subnet-private-us-east-1c
+            type: Filters
+        - placement:
+            availabilityZone: us-east-1d
+          subnet:
+            filters:
+            - name: tag:Name
+              values:
+              - ocp4-bbkn7-subnet-private-us-east-1d
+            type: Filters
+        - placement:
+            availabilityZone: us-east-1f
+          subnet:
+            filters:
+            - name: tag:Name
+              values:
+              - ocp4-bbkn7-subnet-private-us-east-1f
+            type: Filters
+        platform: AWS
+      metadata:
+        labels:
+          machine.openshift.io/cluster-api-cluster: ocp4-bbkn7
+          machine.openshift.io/cluster-api-machine-role: master
+          machine.openshift.io/cluster-api-machine-type: master
+      spec:
+        lifecycleHooks: {}
+        metadata: {}
+        providerSpec:
+          value:
+            ami:
+              id: ami-0e79bb8acc37d2696
+            apiVersion: machine.openshift.io/v1beta1
+            blockDevices:
+            - ebs:
+                encrypted: true
+                iops: 0
+                kmsKey:
+                  arn: ""
+                volumeSize: 120
+                volumeType: gp3
+            credentialsSecret:
+              name: aws-cloud-credentials
+            deviceIndex: 0
+            iamInstanceProfile:
+              id: ocp4-bbkn7-master-profile
+            instanceType: m6i.xlarge
+            kind: AWSMachineProviderConfig
+            loadBalancers:
+            - name: ocp4-bbkn7-int
+              type: network
+            - name: ocp4-bbkn7-ext
+              type: network
+            metadata:
+              creationTimestamp: null
+            metadataServiceOptions: {}
+            placement:
+              region: us-east-1
+            securityGroups:
+            - filters:
+              - name: tag:Name
+                values:
+                - ocp4-bbkn7-node
+            - filters:
+              - name: tag:Name
+                values:
+                - ocp4-bbkn7-lb
+            - filters:
+              - name: tag:Name
+                values:
+                - ocp4-bbkn7-controlplane
+            subnet: {}
+            tags:
+            - name: kubernetes.io/cluster/ocp4-bbkn7
+              value: owned
+            userDataSecret:
+              name: master-user-data
+status: {}

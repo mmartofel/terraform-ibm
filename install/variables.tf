@@ -15,17 +15,17 @@ variable "ami" {
 
 variable "cluster_network_cidr" {
   type        = string
-  default     = "192.168.0.0/17"
+  default     = "10.128.0.0/14"
 }
 
 variable "service_network_cidr" {
   type        = string
-  default     = "192.168.128.0/24"
+  default     = "172.30.0.0/16"
 }
 
 variable "vpc_cidr_block" {
   type        = string
-  default     = "192.168.0.0/24"
+  default     = "10.0.0.0/16"
 }
 
 variable "cluster_network_host_prefix" {
@@ -72,7 +72,7 @@ variable "infra_count" {
 
 variable "aws_infra_instance_type" {
   type = string
-  description = "Instance type for the infra node(s). Example: `m4.large`."
+  description = "Instance type for the infra node(s). Example: `m6i.large`."
   default = "m6i.xlarge"
 }
 
@@ -144,7 +144,7 @@ variable "airgapped" {
 
 variable "openshift_ssh_key" {
   type    = string
-  default = ""
+  default = "./id_ed25519.pub"
 }
 
 variable "openshift_additional_trust_bundle" {
